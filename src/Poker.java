@@ -1,13 +1,16 @@
 public class Poker {
     private String[] bid;
     private String[] cards;
+    private int group1;
+    private int group2;
 
  public Poker (String[] bid, String[] cards){
      this.bid = bid;
      this.cards = cards;
-     int group1 = 0;
-     int group2 = 0;
+     group1 = 0;
+     group2 = 0;
  }
+ //11234
 
  public String analyzeHand(){
      String card1 = "";
@@ -26,8 +29,25 @@ public class Poker {
         card4 = pile.substring(0,(pile.indexOf(",")));
         pile = pile.substring((pile.indexOf(",")));
         card5 = pile;
+        if (card1 == card2){
+            group1 +=1;
+        }
+        if (card1 == card3){
+            group1 +=1;
+        }
+        if (card1 == card4){
+            group1 +=1;
+        }
+        if (card1 == card5){
+            group1 +=1;
+        }
+
+        if(card2 == card1 && card2 != ){
+            group2+
+        }
 
     }
+
 
 
 
