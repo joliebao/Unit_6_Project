@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Poker {
     private int[] bid;
     private String[] cards;
@@ -34,20 +36,25 @@ public class Poker {
         int three = 0;
         int two = 0;
 
-        String card1 = pile.substring(0,(pile.indexOf(",")));
-        pile = pile.substring((pile.indexOf(",")));
+        String card1 = pile.substring(1,(pile.indexOf(",")));
+        pile = pile.substring((pile.indexOf(",")+1));
         String card2 = pile.substring(0,(pile.indexOf(",")));
-        pile = pile.substring((pile.indexOf(",")));
+        pile = pile.substring((pile.indexOf(",")+1));
         String card3 = pile.substring(0,(pile.indexOf(",")));
-        pile = pile.substring((pile.indexOf(",")));
+        pile = pile.substring((pile.indexOf(",")+1));
         String card4 = pile.substring(0,(pile.indexOf(",")));
-        pile = pile.substring((pile.indexOf(",")));
+        pile = pile.substring(pile.indexOf(",") + 1, pile.length() - 1);
         String card5 = pile;
 
-
         // new array made for the single line
-        String[] hand = {card1, card2, card3, card4, card5};
-        for (String each: hand){
+        String[] hand = new String[5];
+        hand[0] = card1;
+        hand[1] = card2;
+        hand[2] = card3;
+        hand[3] = card4;
+        hand[4] = card5;
+
+        for (String each : hand){
             if (each.equals("Ace")) {
                 ace++;
             }
@@ -98,6 +105,7 @@ public class Poker {
             fullHouse++;
         } else if (ace == 3 || king == 3 || queen == 3 || jack == 3 || ten == 3 || nine == 3 || eight == 3 || seven == 3 || six == 3 || five == 3 || four == 3 || three == 3 || two == 3) {
             threeOfAKind++;
+            // needs a better condition for if there are two pairs
         } else if ((ace == 2 || king == 2 || queen == 2 || jack == 2 || ten == 2 || nine == 2 || eight == 2 || seven == 2 || six == 2 || five == 2 || four == 2 || three == 2 || two == 2) &&
                 (ace == 2 || king == 2 || queen == 2 || jack == 2 || ten == 2 || nine == 2 || eight == 2 || seven == 2 || six == 2 || five == 2 || four == 2 || three == 2 || two == 2)) {
             twoPair++;
@@ -106,8 +114,17 @@ public class Poker {
         } else {
             highCard++;
         }
+
+        // testing - - - - --
+        System.out.println(fiveOfAKind);
+        System.out.println(fourOfAKind);
+        System.out.println(threeOfAKind);
+        System.out.println(twoPair);
+        System.out.println(onePair);
+        System.out.println("----------------");
     }
 
+    // totalling - --  -- - - - -
      return "Number of five of a kind hands: " + fiveOfAKind + "\n"+
      "Number of full house hands: " + fullHouse + "\n" +
      "Number of four of a kind hands: " + fourOfAKind + "\n" +
