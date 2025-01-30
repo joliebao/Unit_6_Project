@@ -54,6 +54,7 @@ public class Poker {
         hand[3] = card4;
         hand[4] = card5;
 
+        // Counts how many of EACH card is what
         for (String each : hand){
             if (each.equals("Ace")) {
                 ace++;
@@ -96,6 +97,7 @@ public class Poker {
             }
         }
 
+        // NEW ARRAY: a standard assortment of cards
         int[] standardDeck = new int[13];
         standardDeck[0] = ace;
         standardDeck[1] = two;
@@ -113,8 +115,9 @@ public class Poker {
 
         int triple = 0; // if there are three of a card
         int twice = 0; // if there are two of a card
-        int single = 0;
+        int single = 0; // if there is only one of the card
 
+        // determines how many of each card there are
         for (int amount : standardDeck){
             if (amount == 5){
                 fiveOfAKind++;
@@ -129,8 +132,8 @@ public class Poker {
             }
         }
 
-        System.out.println("Double: " + twice);
-
+        // if not a five/four of a kind,
+        // the other options can only be determined by the amount of triplets, doubles, and singles
         if (triple == 1 && twice == 1) {
             fullHouse++;
         } else if (triple == 1){
@@ -142,14 +145,6 @@ public class Poker {
         } else if (single == 5){
             highCard++;
         }
-
-        // testing - - - - --
-        System.out.println(fiveOfAKind);
-        System.out.println(fourOfAKind);
-        System.out.println(threeOfAKind);
-        System.out.println(twoPair);
-        System.out.println(onePair);
-        System.out.println("----------------");
     }
 
     // totalling - --  -- - - - -
