@@ -7,8 +7,8 @@ public class Main {
     public static void main(String[] args) {
         String[] hand = getFileData("src/InputFile");
         System.out.println(Arrays.toString(hand));
-//        Poker poker = new Poker(hand);
-
+        Poker poker = new Poker(hand);
+        System.out.println(poker.analyzeHand());
     }
 
     public static String[] getFileData(String fileName) {
@@ -35,5 +35,7 @@ public class Main {
             System.exit(1);
         }
         return hand;
+
+
     }
 }
