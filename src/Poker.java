@@ -96,22 +96,50 @@ public class Poker {
             }
         }
 
-        if (ace == 5 || king == 5 || queen == 5 || jack == 5 || ten == 5 || nine == 5 || eight == 5 || seven == 5 || six == 5 || five == 5 || four == 5 || three == 5 || two == 5) {
-            fiveOfAKind++;
-        } else if (ace == 4 || king == 4 || queen == 4 || jack == 4 || ten == 4 || nine == 4 || eight == 4 || seven == 4 || six == 4 || five == 4 || four == 4 || three == 4 || two == 4) {
-            fourOfAKind++;
-        } else if ((ace == 3 || king == 3 || queen == 3 || jack == 3 || ten == 3 || nine == 3 || eight == 3 || seven == 3 || six == 3 || five == 3 || four == 3 || three == 3 || two == 3) &&
-                (ace == 2 || king == 2 || queen == 2 || jack == 2 || ten == 2 || nine == 2 || eight == 2 || seven == 2 || six == 2 || five == 2 || four == 2 || three == 2 || two == 2)) {
+        int[] standardDeck = new int[13];
+        standardDeck[0] = ace;
+        standardDeck[1] = two;
+        standardDeck[2] = three;
+        standardDeck[3] = four;
+        standardDeck[4] = five;
+        standardDeck[5] = six;
+        standardDeck[6] = seven;
+        standardDeck[7] = eight;
+        standardDeck[8] = nine;
+        standardDeck[9] = ten;
+        standardDeck[10] = king;
+        standardDeck[11] = queen;
+        standardDeck[12] = jack;
+
+        int triple = 0; // if there are three of a card
+        int twice = 0; // if there are two of a card
+        int single = 0;
+
+        for (int amount : standardDeck){
+            if (amount == 5){
+                fiveOfAKind++;
+            } else if (amount == 4){
+                fourOfAKind++;
+            } else if (amount == 3){
+                triple ++;
+            } else if (amount == 2){
+                twice ++;
+            } else if (amount == 1){
+                single ++;
+            }
+        }
+
+        System.out.println("Double: " + twice);
+
+        if (triple == 1 && twice == 1) {
             fullHouse++;
-        } else if (ace == 3 || king == 3 || queen == 3 || jack == 3 || ten == 3 || nine == 3 || eight == 3 || seven == 3 || six == 3 || five == 3 || four == 3 || three == 3 || two == 3) {
+        } else if (triple == 1){
             threeOfAKind++;
-            // needs a better condition for if there are two pairs
-        } else if ((ace == 2 || king == 2 || queen == 2 || jack == 2 || ten == 2 || nine == 2 || eight == 2 || seven == 2 || six == 2 || five == 2 || four == 2 || three == 2 || two == 2) &&
-                (ace == 2 || king == 2 || queen == 2 || jack == 2 || ten == 2 || nine == 2 || eight == 2 || seven == 2 || six == 2 || five == 2 || four == 2 || three == 2 || two == 2)) {
+        } else if (twice == 2){
             twoPair++;
-        } else if (ace == 2 || king == 2 || queen == 2 || jack == 2 || ten == 2 || nine == 2 || eight == 2 || seven == 2 || six == 2 || five == 2 || four == 2 || three == 2 || two == 2) {
+        } else if (twice == 1) {
             onePair++;
-        } else {
+        } else if (single == 5){
             highCard++;
         }
 
