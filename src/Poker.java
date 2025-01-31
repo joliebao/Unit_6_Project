@@ -5,6 +5,7 @@ public class Poker {
     private int[] bid;
     private String[] cards;
     private String[] typeOfDeck;
+    private String[] leastToGreatestOrder;
     private int iterationNum;
 
     // sorts of deck hands
@@ -20,6 +21,7 @@ public class Poker {
         this.cards = cards;
         this.bid = bid;
         typeOfDeck = new String[cards.length];
+        leastToGreatestOrder = new String[cards.length];
     }
 
     public void analyzeHand() {  // part 1
@@ -150,34 +152,9 @@ public class Poker {
         }
     }
 
-    public void sort() {
-        System.out.println(typeOfDeck); /// test
-        String[] leastToGreatestOrder = new String[cards.length];
-//        for (int i = 0; i < cards.length; i++){
-//            leastToGreatestOrder[i] = deck.get("High card");
-//            deck.remove("High card");
-//            if (!(deck.containsValue("High card"))){
-//                leastToGreatestOrder[i] = deck.get("One pair");
-//                deck.remove("One pair");
-//            } else if (!(deck.containsValue("One pair"))){
-//                leastToGreatestOrder[i] = deck.get("Two pair");
-//                deck.remove("Two pair");
-//            } else if (!(deck.containsValue("Two pair"))){
-//                leastToGreatestOrder[i] = deck.get("Three of a kind");
-//                deck.remove("Three of a kind");
-//            } else if (!(deck.containsValue("Three of a kind"))){
-//                leastToGreatestOrder[i] = deck.get("Four of a kind");
-//                deck.remove("Four of a kind");
-//            } else if (!(deck.containsValue("Four of a kind"))){
-//                leastToGreatestOrder[i] = deck.get("Full House");
-//                deck.remove("Full House");
-//            } else if (!(deck.containsValue("Full House"))){
-//                leastToGreatestOrder[i] = deck.get("Five of a kind");
-//                deck.remove("Five of a kind");
-//            }
-//
+    public String[] sortByDeck() {
+        // sorted into type of deck
         int i = 0;
-
         while (Arrays.stream(typeOfDeck).anyMatch("High card"::equals) && i < typeOfDeck.length) {
             leastToGreatestOrder[i] = cards[i];
             i++;
@@ -208,6 +185,12 @@ public class Poker {
         }
 
         System.out.println(Arrays.toString(leastToGreatestOrder));
+        return leastToGreatestOrder;
+    }
+
+    public String[] bubbleSort(){
+        //wip
+        return leastToGreatestOrder;
     }
 
 
