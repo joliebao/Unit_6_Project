@@ -17,7 +17,7 @@ public class Main {
 
     // METHOD: all card hands are made into a STRING array
     public static String[] getCards(String fileName) {
-        String[] hand = new String[79];      // change based on number of lines on input file
+        String[] hand = new String[50];      // change based on number of lines on input file
         File f = new File("src/input_file");
 
         String cardLine = "";
@@ -44,7 +44,7 @@ public class Main {
 
     // METHOD: all bets are made into an INTEGER array
     public static int[] getBet(String fileName) {
-        int[] bet = new int[79];
+        int[] bet = new int[50];
         File f = new File("src/input_file");
 
         String betLine = "";
