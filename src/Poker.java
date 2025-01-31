@@ -4,8 +4,7 @@ import java.util.HashMap;
 public class Poker {
     private int[] bid;
     private String[] cards;
-    HashMap<String, String> deck = new HashMap<String, String>();
-    private int iterationNum;
+    HashMap<String, String> deck = new HashMap<>();
 
     // sorts of deck hands
     private int fiveOfAKind = 0;
@@ -19,7 +18,6 @@ public class Poker {
     public Poker(String[] cards, int[] bid) {
         this.cards = cards;
         this.bid = bid;
-        iterationNum = 0;
     }
 
     public void analyzeHand() {  // part 1
@@ -145,40 +143,77 @@ public class Poker {
                 highCard++;
                 deck.put("High card", line);
             }
-
-            iterationNum++;
         }
+
+        System.out.println(deck.size());
     }
 
-    public void sort(){
+    public void sort() {
         System.out.println(deck); /// test
         String[] leastToGreatestOrder = new String[cards.length];
-        for (int i = 0; i < cards.length; i++){
+//        for (int i = 0; i < cards.length; i++){
+//            leastToGreatestOrder[i] = deck.get("High card");
+//            deck.remove("High card");
+//            if (!(deck.containsValue("High card"))){
+//                leastToGreatestOrder[i] = deck.get("One pair");
+//                deck.remove("One pair");
+//            } else if (!(deck.containsValue("One pair"))){
+//                leastToGreatestOrder[i] = deck.get("Two pair");
+//                deck.remove("Two pair");
+//            } else if (!(deck.containsValue("Two pair"))){
+//                leastToGreatestOrder[i] = deck.get("Three of a kind");
+//                deck.remove("Three of a kind");
+//            } else if (!(deck.containsValue("Three of a kind"))){
+//                leastToGreatestOrder[i] = deck.get("Four of a kind");
+//                deck.remove("Four of a kind");
+//            } else if (!(deck.containsValue("Four of a kind"))){
+//                leastToGreatestOrder[i] = deck.get("Full House");
+//                deck.remove("Full House");
+//            } else if (!(deck.containsValue("Full House"))){
+//                leastToGreatestOrder[i] = deck.get("Five of a kind");
+//                deck.remove("Five of a kind");
+//            }
+//
+        int i = 0;
+        while (deck.containsValue("High card")) {
             leastToGreatestOrder[i] = deck.get("High card");
             deck.remove("High card");
-            if (!(deck.containsValue("High card"))){
-                leastToGreatestOrder[i] = deck.get("One pair");
-                deck.remove("One pair");
-            } else if (!(deck.containsValue("One pair"))){
-                leastToGreatestOrder[i] = deck.get("Two pair");
-                deck.remove("Two pair");
-            } else if (!(deck.containsValue("Two pair"))){
-                leastToGreatestOrder[i] = deck.get("Three of a kind");
-                deck.remove("Three of a kind");
-            } else if (!(deck.containsValue("Three of a kind"))){
-                leastToGreatestOrder[i] = deck.get("Four of a kind");
-                deck.remove("Four of a kind");
-            } else if (!(deck.containsValue("Four of a kind"))){
-                leastToGreatestOrder[i] = deck.get("Full House");
-                deck.remove("Full House");
-            } else if (!(deck.containsValue("Full House"))){
-                leastToGreatestOrder[i] = deck.get("Five of a kind");
-                deck.remove("Five of a kind");
-            }
+            i++;
+        }
+        while (deck.containsValue("One pair")){
+            leastToGreatestOrder[i] = deck.get("One pair");
+            deck.remove("One pair");
+            i++;
+        }
+        while (deck.containsValue("Two pair")) {
+            leastToGreatestOrder[i] = deck.get("Two pair");
+            deck.remove("Two pair");
+            i++;
+        }
+        while (deck.containsValue("Three of a kind")) {
+            leastToGreatestOrder[i] = deck.get("Three of a kind");
+            deck.remove("Three of a kind");
+            i++;
+        }
+        while (deck.containsValue("Four of a kind")) {
+            leastToGreatestOrder[i] = deck.get("Four of a kind");
+            deck.remove("Four of a kind");
+            i++;
+        }
+        while (deck.containsValue("Full House")) {
+            leastToGreatestOrder[i] = deck.get("Full House");
+            deck.remove("Full House");
+            i++;
+        }
+        while (deck.containsValue("Five of a kind")) {
+            leastToGreatestOrder[i] = deck.get("Five of a kind");
+            deck.remove("Five of a kind");
+            i++;
         }
 
         System.out.println(Arrays.toString(leastToGreatestOrder));
     }
+
 
     public String toString(){
         return "Number of five of a kind hands: " + fiveOfAKind + "\n" +

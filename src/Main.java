@@ -11,11 +11,13 @@ public class Main {
         Poker poker = new Poker(hand, bet);
         poker.analyzeHand();
         poker.sort();
+        System.out.println("____________");
+        System.out.println(poker);
     }
 
     // METHOD: all card hands are made into a STRING array
     public static String[] getCards(String fileName) {
-        String[] hand = new String[6];      // change based on number of lines on input file
+        String[] hand = new String[79];      // change based on number of lines on input file
         File f = new File("src/input_file");
 
         String cardLine = "";
@@ -42,7 +44,7 @@ public class Main {
 
     // METHOD: all bets are made into an INTEGER array
     public static int[] getBet(String fileName) {
-        int[] bet = new int[6];
+        int[] bet = new int[79];
         File f = new File("src/input_file");
 
         String betLine = "";
