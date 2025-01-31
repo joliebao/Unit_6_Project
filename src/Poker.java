@@ -1,9 +1,10 @@
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class Poker {
     private int[] bid;
     private String[] cards;
-    private static String[] rankingOrder;
+    HashMap<String, String> deck = new HashMap<String, String>();
     private int iterationNum;
 
     // sorts of deck hands
@@ -18,7 +19,6 @@ public class Poker {
     public Poker(String[] cards, int[] bid) {
         this.cards = cards;
         this.bid = bid;
-        this.rankingOrder = new String[cards.length];
         iterationNum = 0;
     }
 
@@ -114,10 +114,10 @@ public class Poker {
             for (int amount : standardDeck) {
                 if (amount == 5) {
                     fiveOfAKind++;
-                    rankingOrder[iterationNum] = "Five of a kind";
+                    deck.put("Five of a kind", line);
                 } else if (amount == 4) {
                     fourOfAKind++;
-                    rankingOrder[iterationNum] = "Four of a kind";
+                    deck.put("Four of a kind", line);
                 } else if (amount == 3) {
                     triple++;
                 } else if (amount == 2) {
@@ -131,23 +131,27 @@ public class Poker {
             // the other options can only be determined by the amount of triplets, doubles, and singles
             if (triple == 1 && twice == 1) {
                 fullHouse++;
-                rankingOrder[iterationNum] = "Full House";
+                deck.put("Full house", line);
             } else if (triple == 1) {
                 threeOfAKind++;
-                rankingOrder[iterationNum] = "Three of a kind";
+                deck.put("Three of a kind", line);
             } else if (twice == 2) {
                 twoPair++;
-                rankingOrder[iterationNum] = "Two pair";
+                deck.put("Two pair", line);
             } else if (twice == 1) {
                 onePair++;
-                rankingOrder[iterationNum] = "One pair";
+                deck.put("One pair", line);
             } else if (single == 5) {
                 highCard++;
-                rankingOrder[iterationNum] = "High card";
+                deck.put("High card", line);
             }
 
             iterationNum++;
         }
+    }
+
+    public void sort(){
+        System.out.println(deck);
     }
 
     public String toString(){

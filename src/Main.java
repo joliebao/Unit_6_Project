@@ -9,7 +9,8 @@ public class Main {
         int[] bet = getBet("src/InputFile");
 
         Poker poker = new Poker(hand, bet);
-        System.out.println(poker.analyzeHand());
+        poker.analyzeHand();
+        poker.sort();
     }
 
     // METHOD: all card hands are made into a STRING array
