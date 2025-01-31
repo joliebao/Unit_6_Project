@@ -210,6 +210,15 @@ public class Poker {
                         if(index=="Ace"){
                             fiveOAKValue.add(1);
                         }
+                        else if (index =="Jack"){
+                            fiveOAKValue.add(11);
+                        }
+                        else if (index =="Queen"){
+                            fiveOAKValue.add(12);
+                        }
+                        else if (index =="King"){
+                            fiveOAKValue.add(13);
+                        }
                         else if (Integer.parseInt(index)==2){
                             fiveOAKValue.add(2);
                         }
@@ -275,6 +284,15 @@ public class Poker {
                         if(index=="Ace"){
                             fourOAKValue.add(1);
                         }
+                        else if (index =="Jack"){
+                            fourOAKValue.add(11);
+                        }
+                        else if (index =="Queen"){
+                            fourOAKValue.add(12);
+                        }
+                        else if (index =="King"){
+                            fourOAKValue.add(13);
+                        }
                         else if (Integer.parseInt(index)==2){
                             fourOAKValue.add(2);
                         }
@@ -302,15 +320,133 @@ public class Poker {
                         else if (Integer.parseInt(index)==10){
                             fourOAKValue.add(10);
                         }
+
+
+
+                    }
+
+
+                }
+
+            }
+            for(int i=0; i < threeOAK.size(); i++){
+                for(String each : threeOAK){
+                    String num1 = each.substring(1,(each.indexOf(",")));
+                    each = each.substring((each.indexOf(",")+1));
+                    String num2 = each.substring(0,(each.indexOf(",")));
+                    each = each.substring((each.indexOf(",")+1));
+                    String num3 = each.substring(0,(each.indexOf(",")));
+                    each = each.substring((each.indexOf(",")+1));
+                    String num4 = each.substring(0,(each.indexOf(",")));
+                    each = each.substring(each.indexOf(",") + 1, each.length() - 1);
+                    String num5 = each;
+
+                    String[] temporary = {num1,num2,num3,num4,num5};
+
+                    for(String index:temporary){
+                        if(index=="Ace"){
+                            threeOAKValue.add(1);
+                        }
                         else if (index =="Jack"){
-                            fourOAKValue.add(11);
+                            threeOAKValue.add(11);
                         }
                         else if (index =="Queen"){
-                            fourOAKValue.add(12);
+                            threeOAKValue.add(12);
                         }
                         else if (index =="King"){
-                            fourOAKValue.add(13);
+                            threeOAKValue.add(13);
                         }
+                        else if (Integer.parseInt(index)==2){
+                            threeOAKValue.add(2);
+                        }
+                        else if (Integer.parseInt(index)==3){
+                            threeOAKValue.add(3);
+                        }
+                        else if (Integer.parseInt(index)==4){
+                            threeOAKValue.add(4);
+                        }
+                        else if (Integer.parseInt(index)==5){
+                            threeOAKValue.add(5);
+                        }
+                        else if (Integer.parseInt(index)==6){
+                            threeOAKValue.add(6);
+                        }
+                        else if (Integer.parseInt(index)==7){
+                            threeOAKValue.add(7);
+                        }
+                        else if (Integer.parseInt(index)==8){
+                            threeOAKValue.add(8);
+                        }
+                        else if (Integer.parseInt(index)==9){
+                            threeOAKValue.add(9);
+                        }
+                        else if (Integer.parseInt(index)==10){
+                            threeOAKValue.add(10);
+                        }
+
+
+
+                    }
+
+                }
+
+            }
+
+            for(int i=0; i < fullH.size(); i++){
+                for(String each : fullH){
+                    String num1 = each.substring(1,(each.indexOf(",")));
+                    each = each.substring((each.indexOf(",")+1));
+                    String num2 = each.substring(0,(each.indexOf(",")));
+                    each = each.substring((each.indexOf(",")+1));
+                    String num3 = each.substring(0,(each.indexOf(",")));
+                    each = each.substring((each.indexOf(",")+1));
+                    String num4 = each.substring(0,(each.indexOf(",")));
+                    each = each.substring(each.indexOf(",") + 1, each.length() - 1);
+                    String num5 = each;
+
+                    String[] temporary = {num1,num2,num3,num4,num5};
+
+                    for(String index:temporary){
+                        if(index=="Ace"){
+                            fullHouseValue.add(1);
+                        }
+                        else if (index =="Jack"){
+                            fullHouseValue.add(11);
+                        }
+                        else if (index =="Queen"){
+                            fullHouseValue.add(12);
+                        }
+                        else if (index =="King"){
+                            fullHouseValue.add(13);
+                        }
+                        else if (Integer.parseInt(index)==2){
+                            fullHouseValue.add(2);
+                        }
+                        else if (Integer.parseInt(index)==3){
+                            fullHouseValue.add(3);
+                        }
+                        else if (Integer.parseInt(index)==4){
+                            fullHouseValue.add(4);
+                        }
+                        else if (Integer.parseInt(index)==5){
+                            fullHouseValue.add(5);
+                        }
+                        else if (Integer.parseInt(index)==6){
+                            fullHouseValue.add(6);
+                        }
+                        else if (Integer.parseInt(index)==7){
+                            fullHouseValue.add(7);
+                        }
+                        else if (Integer.parseInt(index)==8){
+                            fullHouseValue.add(8);
+                        }
+                        else if (Integer.parseInt(index)==9){
+                            fullHouseValue.add(9);
+                        }
+                        else if (Integer.parseInt(index)==10){
+                            fullHouseValue.add(10);
+                        }
+
 
 
                     }
@@ -322,6 +458,7 @@ public class Poker {
 
 
             }
+
         }
 
 
@@ -337,7 +474,7 @@ public class Poker {
                 "Number of three of a kind hands: " + threeOfAKind + "\n" +
                 "Number of two pair hands: " + twoPair + "\n" +
                 "Number of one pair hands: " + onePair + "\n" +
-                "Number of high card hands: " + highCard+"\n"+fiveOAKValue+fourOAKValue;
+                "Number of high card hands: " + highCard+"\n"+fiveOAKValue+fourOAKValue+threeOAKValue;
     }
 
 
