@@ -151,7 +151,33 @@ public class Poker {
     }
 
     public void sort(){
-        System.out.println(deck);
+        System.out.println(deck); /// test
+        String[] leastToGreatestOrder = new String[cards.length];
+        for (int i = 0; i < cards.length; i++){
+            leastToGreatestOrder[i] = deck.get("High card");
+            deck.remove("High card");
+            if (!(deck.containsValue("High card"))){
+                leastToGreatestOrder[i] = deck.get("One pair");
+                deck.remove("One pair");
+            } else if (!(deck.containsValue("One pair"))){
+                leastToGreatestOrder[i] = deck.get("Two pair");
+                deck.remove("Two pair");
+            } else if (!(deck.containsValue("Two pair"))){
+                leastToGreatestOrder[i] = deck.get("Three of a kind");
+                deck.remove("Three of a kind");
+            } else if (!(deck.containsValue("Three of a kind"))){
+                leastToGreatestOrder[i] = deck.get("Four of a kind");
+                deck.remove("Four of a kind");
+            } else if (!(deck.containsValue("Four of a kind"))){
+                leastToGreatestOrder[i] = deck.get("Full House");
+                deck.remove("Full House");
+            } else if (!(deck.containsValue("Full House"))){
+                leastToGreatestOrder[i] = deck.get("Five of a kind");
+                deck.remove("Five of a kind");
+            }
+        }
+
+        System.out.println(Arrays.toString(leastToGreatestOrder));
     }
 
     public String toString(){
