@@ -4,7 +4,7 @@ import java.util.HashMap;
 public class Poker {
     private int[] bid;
     private String[] cards;
-    private String[] typeOfDeck;
+    private int[] typeOfDeck;
     private String[] leastToGreatestOrder;
     private int iterationNum;
 
@@ -20,7 +20,7 @@ public class Poker {
     public Poker(String[] cards, int[] bid) {
         this.cards = cards;
         this.bid = bid;
-        typeOfDeck = new String[cards.length];
+        typeOfDeck = new int[cards.length];
         leastToGreatestOrder = new String[cards.length];
     }
 
@@ -28,20 +28,7 @@ public class Poker {
         // putting each element in the line into a specific card number
         for (String pile : cards) {
             String line = pile;
-            // types of cards
-            int ace = 0;
-            int king = 0;
-            int queen = 0;
-            int jack = 0;
-            int ten = 0;
-            int nine = 0;
-            int eight = 0;
-            int seven = 0;
-            int six = 0;
-            int five = 0;
-            int four = 0;
-            int three = 0;
-            int two = 0;
+            int amount = 0;
 
             String card1 = pile.substring(1, (pile.indexOf(",")));
             pile = pile.substring((pile.indexOf(",") + 1));
@@ -61,91 +48,44 @@ public class Poker {
             hand[3] = card4;
             hand[4] = card5;
 
-            // Counts how many of EACH card is what
-            for (String each : hand) {
-                if (each.equals("Ace")) {
-                    ace++;
-                } else if (each.equals("King")) {
-                    king++;
-                } else if (each.equals("Queen")) {
-                    queen++;
-                } else if (each.equals("Jack")) {
-                    jack++;
-                } else if (each.equals("10")) {
-                    ten++;
-                } else if (each.equals("9")) {
-                    nine++;
-                } else if (each.equals("8")) {
-                    eight++;
-                } else if (each.equals("7")) {
-                    seven++;
-                } else if (each.equals("6")) {
-                    six++;
-                } else if (each.equals("5")) {
-                    five++;
-                } else if (each.equals("4")) {
-                    four++;
-                } else if (each.equals("3")) {
-                    three++;
-                } else if (each.equals("2")) {
-                    two++;
+            int counter1 = 0;
+            int counter2 = 0;
+            int counter3 = 0;
+            int counter4 = 0;
+
+            for (int i = 0; i < hand.length; i++) {
+                if (hand[0].equals(hand[i])) {
+                    counter1++;
+                } else if (hand[counter1].equals(hand[i])) {
+                    counter2++;
+                } else if (hand[counter2 + counter1].equals(hand[i])) {
+                    counter3++;
+                } else if (hand[counter3 + counter2 + counter1].equals(hand[i])) {
+                    counter4++;
                 }
             }
 
-            // NEW ARRAY: a standard assortment of cards
-            int[] standardDeck = new int[13];
-            standardDeck[0] = ace;
-            standardDeck[1] = two;
-            standardDeck[2] = three;
-            standardDeck[3] = four;
-            standardDeck[4] = five;
-            standardDeck[5] = six;
-            standardDeck[6] = seven;
-            standardDeck[7] = eight;
-            standardDeck[8] = nine;
-            standardDeck[9] = ten;
-            standardDeck[10] = king;
-            standardDeck[11] = queen;
-            standardDeck[12] = jack;
-
-            int triple = 0; // if there are three of a card
-            int twice = 0; // if there are two of a card
-            int single = 0; // if there is only one of the card
-
-            // determines how many of each card there are
-            for (int amount : standardDeck) {
-                if (amount == 5) {
-                    fiveOfAKind++;
-                    typeOfDeck[iterationNum] = "Five of a kind";
-                } else if (amount == 4) {
-                    fourOfAKind++;
-                    typeOfDeck[iterationNum] = "Four of a kind";
-                } else if (amount == 3) {
-                    triple++;
-                } else if (amount == 2) {
-                    twice++;
-                } else if (amount == 1) {
-                    single++;
-                }
-            }
-
-            // if not a five/four of a kind,
-            // the other options can only be determined by the amount of triplets, doubles, and singles
-            if (triple == 1 && twice == 1) {
+            if (counter1 == 5) {
+                fiveOfAKind++;
+                typeOfDeck[iterationNum] = 7;
+            } else if (counter1 == 3 && counter2 == 2){
                 fullHouse++;
-                typeOfDeck[iterationNum] = "Full house";
-            } else if (triple == 1) {
+                typeOfDeck[iterationNum] = 6;
+            } else if (counter1 == 4){
+                fourOfAKind++;
+                typeOfDeck[iterationNum] = 5;
+            } else if (counter1 == 3) {
                 threeOfAKind++;
-                typeOfDeck[iterationNum] = "Three of a kind";
-            } else if (twice == 2) {
+                typeOfDeck[iterationNum] = 4;
+            } else if (counter1 == 2 && counter2 == 2) {
                 twoPair++;
-                typeOfDeck[iterationNum] = "Two pair";
-            } else if (twice == 1) {
+                typeOfDeck[iterationNum] = 3;
+            } else if (counter1 == 2) {
                 onePair++;
-                typeOfDeck[iterationNum] = "One pair";
-            } else if (single == 5) {
+                typeOfDeck[iterationNum] = 2;
+            } else if (counter1 == 1) {
                 highCard++;
-                typeOfDeck[iterationNum] = "High Card";
+                typeOfDeck[iterationNum] = 1;
             }
 
             iterationNum++;
@@ -155,7 +95,7 @@ public class Poker {
     // Part 2 ----------------------- - - -- - - - -
     // Note: Still need to match with bid value and create the totaling method
     // Sorting by deck title (ex. high card, one pair, two pair)
-    public String[] sortByDeck() {
+    public void sortByDeck() {
         // sorted into type of deck
         int i = 0;
         while (Arrays.stream(typeOfDeck).anyMatch("High card"::equals) && i < typeOfDeck.length) {
@@ -188,12 +128,11 @@ public class Poker {
         }
 
         System.out.println(Arrays.toString(leastToGreatestOrder));
-        return leastToGreatestOrder;
     }
 
     // sort by numbers (ex. 1, 2, 3)
     // Note: need to consider the deck rankings, maybe deck ranking would occur second when the methods are called?
-    public String[] bubbleSort(){
+    public void bubbleSort(){
         for (int i = 0; i < leastToGreatestOrder.length; i++){
             int counter = 0;
             String deck1 = leastToGreatestOrder[i];
@@ -242,11 +181,6 @@ public class Poker {
                 }
             }
         }
-        return leastToGreatestOrder;
-    }
-
-    public int totalBidValue(){
-        return 0; // placeholder, change when it is implemented
     }
 
     public String toString(){
