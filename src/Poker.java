@@ -27,26 +27,12 @@ public class Poker {
     public void analyzeHand() {  // part 1
         // putting each element in the line into a specific card number
         for (String pile : cards) {
+            pile = pile.replace("[", "");
+            pile = pile.replace("]", "");
             String line = pile;
-            int amount = 0;
 
-            String card1 = pile.substring(1, (pile.indexOf(",")));
-            pile = pile.substring((pile.indexOf(",") + 1));
-            String card2 = pile.substring(0, (pile.indexOf(",")));
-            pile = pile.substring((pile.indexOf(",") + 1));
-            String card3 = pile.substring(0, (pile.indexOf(",")));
-            pile = pile.substring((pile.indexOf(",") + 1));
-            String card4 = pile.substring(0, (pile.indexOf(",")));
-            pile = pile.substring(pile.indexOf(",") + 1, pile.length() - 1);
-            String card5 = pile;
-
-            // new array made for the single line
-            String[] hand = new String[5];
-            hand[0] = card1;
-            hand[1] = card2;
-            hand[2] = card3;
-            hand[3] = card4;
-            hand[4] = card5;
+            String[] hand = pile.split(",");
+            System.out.println(Arrays.toString(hand));
 
             int counter1 = 0;
             int counter2 = 0;
@@ -65,25 +51,44 @@ public class Poker {
                 }
             }
 
+            System.out.println("Counter1:" + counter1);
+            System.out.println("Counter2:" + counter2);
+            System.out.println("Counter3:" + counter3);
+            System.out.println("Counter4:" + counter4);
+            System.out.println("----");
+
+            int triple = 0;
+            int twice = 0;
+
+            int[] counters = {counter1, counter2, counter3, counter4};
+
+            for (int counter : counters){
+                if (counter == 3) {
+                    triple++;
+                } else if (counter == 2) {
+                    twice++;
+                }
+            }
+
             if (counter1 == 5) {
                 fiveOfAKind++;
                 typeOfDeck[iterationNum] = 7;
-            } else if (counter1 == 3 && counter2 == 2){
+            } else if (triple == 1 && twice == 1){
                 fullHouse++;
                 typeOfDeck[iterationNum] = 6;
-            } else if (counter1 == 4){
+            } else if (counter1 == 4 || counter2 == 4){
                 fourOfAKind++;
                 typeOfDeck[iterationNum] = 5;
-            } else if (counter1 == 3) {
+            } else if (triple == 1) {
                 threeOfAKind++;
                 typeOfDeck[iterationNum] = 4;
-            } else if (counter1 == 2 && counter2 == 2) {
+            } else if (twice == 2) {
                 twoPair++;
                 typeOfDeck[iterationNum] = 3;
-            } else if (counter1 == 2) {
+            } else if (twice == 1) {
                 onePair++;
                 typeOfDeck[iterationNum] = 2;
-            } else if (counter1 == 1) {
+            } else {
                 highCard++;
                 typeOfDeck[iterationNum] = 1;
             }
