@@ -152,6 +152,9 @@ public class Poker {
         }
     }
 
+    // Part 2 ----------------------- - - -- - - - -
+    // Note: Still need to match with bid value and create the totaling method
+    // Sorting by deck title (ex. high card, one pair, two pair)
     public String[] sortByDeck() {
         // sorted into type of deck
         int i = 0;
@@ -188,11 +191,63 @@ public class Poker {
         return leastToGreatestOrder;
     }
 
+    // sort by numbers (ex. 1, 2, 3)
+    // Note: need to consider the deck rankings, maybe deck ranking would occur second when the methods are called?
     public String[] bubbleSort(){
-        //wip
+        for (int i = 0; i < leastToGreatestOrder.length; i++){
+            int counter = 0;
+            String deck1 = leastToGreatestOrder[i];
+            String deck2 = leastToGreatestOrder[i+1];
+
+            while (counter < 5){
+                if (counter > 1){
+                    deck1 = deck1.substring(deck1.indexOf(" "));
+                    deck2 = deck2.substring(deck2.indexOf(" "));
+                }
+                String card1 = deck1.substring(0, deck1.indexOf(" "));
+                String card2 = deck2.substring(0, deck2.indexOf(" "));
+                int conversion1 = 0;
+                int conversion2 = 0;
+
+                if (card1.equals("King")){
+                    conversion1 = 13;
+                } else if (card1.equals("Queen")){
+                    conversion1 = 12;
+                } else if (card1.equals("Jack")){
+                    conversion1 = 11;
+                } else if (card1.equals("Ace")){
+                    conversion1 = 1;
+                } else {
+                    conversion1 = Integer.parseInt(card1);
+                }
+
+                if (card2.equals("King")){
+                    conversion2 = 13;
+                } else if (card2.equals("Queen")){
+                    conversion2 = 12;
+                } else if (card2.equals("Jack")){
+                    conversion2 = 11;
+                } else if (card2.equals("Ace")){
+                    conversion2 = 1;
+                } else {
+                    conversion2 = Integer.parseInt(card2);
+                }
+
+                if (conversion1 > conversion2){
+                    leastToGreatestOrder[i] = deck2;
+                    leastToGreatestOrder[i+1] = deck1;
+                }
+                else if (conversion1 == conversion2){
+                    counter++;
+                }
+            }
+        }
         return leastToGreatestOrder;
     }
 
+    public int totalBidValue(){
+        return 0; // placeholder, change when it is implemented
+    }
 
     public String toString(){
         return "Number of five of a kind hands: " + fiveOfAKind + "\n" +
