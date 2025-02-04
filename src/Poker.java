@@ -5,7 +5,6 @@ public class Poker {
     private int[] bid;
     private String[] cards;
     private int[] typeOfDeck;
-    private String[] leastToGreatestOrder;
     private int iterationNum;
 
     // sorts of deck hands
@@ -17,11 +16,12 @@ public class Poker {
     private int onePair = 0;
     private int highCard = 0;
 
+    private int total = 0;
+
     public Poker(String[] cards, int[] bid) {
         this.cards = cards;
         this.bid = bid;
         typeOfDeck = new int[cards.length];
-        leastToGreatestOrder = new String[cards.length];
     }
 
     public void analyzeHand() {  // part 1
@@ -32,7 +32,6 @@ public class Poker {
             String line = pile;
 
             String[] hand = pile.split(",");
-            System.out.println(Arrays.toString(hand));
 
             int counter1 = 0;
             int counter2 = 0;
@@ -96,46 +95,43 @@ public class Poker {
     // Sorting by deck title (ex. high card, one pair, two pair)
     public void sortByDeck() {
         // sorted into type of deck
+        // indexGetterArray = original hand value; use it to compare the array values and change the bid+card values to match
+        int[] indexGetterArray = typeOfDeck;
+        System.out.println(Arrays.toString(indexGetterArray));
+        Arrays.sort(typeOfDeck);
+        System.out.println(Arrays.toString(typeOfDeck));
+
+        int counter = 0;
         int i = 0;
-        while (Arrays.stream(typeOfDeck).anyMatch("High card"::equals) && i < typeOfDeck.length) {
-            leastToGreatestOrder[i] = cards[i];
-            i++;
-        }
-        while (Arrays.stream(typeOfDeck).anyMatch("One pair"::equals) && i < typeOfDeck.length){
-            leastToGreatestOrder[i] = cards[i];
-            i++;
-        }
-        while (Arrays.stream(typeOfDeck).anyMatch("Two pair"::equals) && i < typeOfDeck.length) {
-            leastToGreatestOrder[i] = cards[i];
-            i++;
-        }
-        while (Arrays.stream(typeOfDeck).anyMatch("Three of a kind"::equals) && i < typeOfDeck.length) {
-            leastToGreatestOrder[i] = cards[i];
-            i++;
-        }
-        while (Arrays.stream(typeOfDeck).anyMatch("Four of a kind"::equals) && i < typeOfDeck.length) {
-            leastToGreatestOrder[i] = cards[i];
-            i++;
-        }
-        while (Arrays.stream(typeOfDeck).anyMatch("Full house"::equals) && i < typeOfDeck.length) {
-            leastToGreatestOrder[i] = cards[i];
-            i++;
-        }
-        while (Arrays.stream(typeOfDeck).anyMatch("Five of a kind"::equals) && i < typeOfDeck.length) {
-            leastToGreatestOrder[i] = cards[i];
-            i++;
+        while (i < indexGetterArray.length){
+            if (indexGetterArray[counter] != typeOfDeck[i]) {
+                counter ++;
+            } else {
+                String temp = cards[i];
+                cards[i] = cards[counter];
+                cards[counter] = temp;
+
+                int placeholder = bid[i];
+                bid[i] = bid[counter];
+                bid[counter] = placeholder;
+
+                counter++;
+                i++;
+            }
         }
 
-        System.out.println(Arrays.toString(leastToGreatestOrder));
+        // testing
+        System.out.println(Arrays.toString(cards));
+        System.out.println(Arrays.toString(bid));
     }
 
     // sort by numbers (ex. 1, 2, 3)
     // Note: need to consider the deck rankings, maybe deck ranking would occur second when the methods are called?
     public void bubbleSort(){
-        for (int i = 0; i < leastToGreatestOrder.length; i++){
+        for (int i = 0; i < cards.length; i++){
             int counter = 0;
-            String deck1 = leastToGreatestOrder[i];
-            String deck2 = leastToGreatestOrder[i+1];
+            String deck1 = cards[i];
+            String deck2 = cards[i+1];
 
             while (counter < 5){
                 if (counter > 1){
@@ -172,14 +168,21 @@ public class Poker {
                 }
 
                 if (conversion1 > conversion2){
-                    leastToGreatestOrder[i] = deck2;
-                    leastToGreatestOrder[i+1] = deck1;
+                    cards[i] = deck2;
+                    cards[i+1] = deck1;
                 }
                 else if (conversion1 == conversion2){
                     counter++;
                 }
             }
         }
+    }
+
+    public int totalBid(){
+        for (int i = 0; i < cards.length; i++){
+            total += bid[i] * i;
+        }
+        return total;
     }
 
     public String toString(){
@@ -189,6 +192,8 @@ public class Poker {
                 "Number of three of a kind hands: " + threeOfAKind + "\n" +
                 "Number of two pair hands: " + twoPair + "\n" +
                 "Number of one pair hands: " + onePair + "\n" +
-                "Number of high card hands: " + highCard;
+                "Number of high card hands: " + highCard + "\n" +
+                "Total Bid Value: " + total + "\n" +
+                "Total Bid Value With Jacks Wild: " ; // add this variable after part 3
     }
 }
