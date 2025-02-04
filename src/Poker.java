@@ -28,8 +28,7 @@ public class Poker {
         // putting each element in the line into a specific card number
         for (String pile : cards) {
             pile = pile.replace("[", "");
-            pile = pile.replace("]", "");
-            String line = pile;
+            pile = pile.replace("]", "");;
 
             String[] hand = pile.split(",");
 
@@ -96,33 +95,28 @@ public class Poker {
     public void sortByDeck() {
         // sorted into type of deck
         // indexGetterArray = original hand value; use it to compare the array values and change the bid+card values to match
-        int[] indexGetterArray = typeOfDeck;
-        System.out.println(Arrays.toString(indexGetterArray));
-        Arrays.sort(typeOfDeck);
-        System.out.println(Arrays.toString(typeOfDeck));
+        String indexGetter = "";
+        for (int num : typeOfDeck){
+            indexGetter += num;
+        }
 
-        int counter = 0;
-        int i = 0;
-        while (i < indexGetterArray.length){
-            if (indexGetterArray[counter] != typeOfDeck[i]) {
-                counter ++;
-            } else {
-                String temp = cards[i];
-                cards[i] = cards[counter];
-                cards[counter] = temp;
-
-                int placeholder = bid[i];
-                bid[i] = bid[counter];
-                bid[counter] = placeholder;
-
-                counter++;
-                i++;
+        System.out.println(indexGetter);
+        for (int i = 0; i<typeOfDeck.length; i ++){
+            while (indexGetter.indexOf("1") != - 1) {
+                int index = indexGetter.indexOf("1");
+                System.out.println(index);
+                indexGetter = indexGetter.substring(0, index) + indexGetter.substring(index +1);
+                int temp = bid[0];
+                bid[0] = bid[index];
+                bid[index] = temp;
             }
         }
 
-        // testing
-        System.out.println(Arrays.toString(cards));
         System.out.println(Arrays.toString(bid));
+
+//        Arrays.sort(typeOfDeck);
+//        System.out.println(Arrays.toString(typeOfDeck));
+
     }
 
     // sort by numbers (ex. 1, 2, 3)
@@ -132,14 +126,21 @@ public class Poker {
             int counter = 0;
             String deck1 = cards[i];
             String deck2 = cards[i+1];
+            String card1 = "";
+            String card2 = "";
 
             while (counter < 5){
-                if (counter > 1){
+                if (counter == 1){
                     deck1 = deck1.substring(deck1.indexOf(" "));
                     deck2 = deck2.substring(deck2.indexOf(" "));
                 }
-                String card1 = deck1.substring(0, deck1.indexOf(" "));
-                String card2 = deck2.substring(0, deck2.indexOf(" "));
+                if (counter == 4) {
+                    card1 = deck1;
+                    card2 = deck2;
+                } else {
+                    card1 = deck1.substring(0, deck1.indexOf(" "));
+                    card2 = deck2.substring(0, deck2.indexOf(" "));
+                }
                 int conversion1 = 0;
                 int conversion2 = 0;
 
@@ -176,11 +177,12 @@ public class Poker {
                 }
             }
         }
+        System.out.println(Arrays.toString(cards));
     }
 
     public int totalBid(){
         for (int i = 0; i < cards.length; i++){
-            total += bid[i] * i;
+            total += bid[i] * i+1;
         }
         return total;
     }
