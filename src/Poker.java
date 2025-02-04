@@ -42,20 +42,14 @@ public class Poker {
             for (int i = 0; i < hand.length; i++) {
                 if (hand[0].equals(hand[i])) {
                     counter1++;
-                } else if (hand[counter1].equals(hand[i])) {
+                } else if (hand[1].equals(hand[i])) {
                     counter2++;
-                } else if (hand[counter2 + counter1].equals(hand[i])) {
+                } else if (hand[2].equals(hand[i])) {
                     counter3++;
-                } else if (hand[counter3 + counter2 + counter1].equals(hand[i])) {
+                } else if (hand[3].equals(hand[i])) {
                     counter4++;
                 }
             }
-
-            System.out.println("Counter1:" + counter1);
-            System.out.println("Counter2:" + counter2);
-            System.out.println("Counter3:" + counter3);
-            System.out.println("Counter4:" + counter4);
-            System.out.println("----");
 
             int triple = 0;
             int twice = 0;
