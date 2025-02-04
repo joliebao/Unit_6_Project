@@ -101,15 +101,76 @@ public class Poker {
         }
 
         System.out.println(indexGetter);
-        for (int i = 0; i<typeOfDeck.length; i ++){
-            while (indexGetter.indexOf("1") != - 1) {
-                int index = indexGetter.indexOf("1");
-                System.out.println(index);
-                indexGetter = indexGetter.substring(0, index) + indexGetter.substring(index +1);
-                int temp = bid[0];
-                bid[0] = bid[index];
-                bid[index] = temp;
-            }
+        int i = 0;
+        while (indexGetter.indexOf("1") != - 1) {
+            int index = indexGetter.indexOf("1");
+            System.out.println("index: " + index);
+            indexGetter = indexGetter.substring(0, index) + indexGetter.substring(index +1);
+            System.out.println("after: " + indexGetter);
+            int temp = bid[i];
+            bid[i] = bid[index];
+            bid[index] = temp;
+            i++;
+        }
+        while (indexGetter.indexOf("2") != - 1) {
+            int index = indexGetter.indexOf("2");
+            System.out.println("index: " + index);
+            indexGetter = indexGetter.substring(0, index) + indexGetter.substring(index +1);
+            System.out.println("after: " + indexGetter);
+            int temp = bid[i];
+            bid[i] = bid[index];
+            bid[index] = temp;
+            i++;
+        }
+        while (indexGetter.indexOf("3") != - 1) {
+            int index = indexGetter.indexOf("3");
+            System.out.println("index: " + index);
+            indexGetter = indexGetter.substring(0, index) + indexGetter.substring(index +1);
+            System.out.println("after: " + indexGetter);
+            int temp = bid[i];
+            bid[i] = bid[index];
+            bid[index] = temp;
+            i++;
+        }
+        while (indexGetter.indexOf("4") != - 1) {
+            int index = indexGetter.indexOf("4");
+            System.out.println("index: " + index);
+            indexGetter = indexGetter.substring(0, index) + indexGetter.substring(index +1);
+            System.out.println("after: " + indexGetter);
+            int temp = bid[i];
+            bid[i] = bid[index];
+            bid[index] = temp;
+            i++;
+        }
+        while (indexGetter.indexOf("5") != - 1) {
+            int index = indexGetter.indexOf("5");
+            System.out.println("index: " + index);
+            indexGetter = indexGetter.substring(0, index) + indexGetter.substring(index +1);
+            System.out.println("after: " + indexGetter);
+            int temp = bid[i];
+            bid[i] = bid[index];
+            bid[index] = temp;
+            i++;
+        }
+        while (indexGetter.indexOf("6") != - 1) {
+            int index = indexGetter.indexOf("6");
+            System.out.println("index: " + index);
+            indexGetter = indexGetter.substring(0, index) + indexGetter.substring(index +1);
+            System.out.println("after: " + indexGetter);
+            int temp = bid[i];
+            bid[i] = bid[index];
+            bid[index] = temp;
+            i++;
+        }
+        while (indexGetter.indexOf("7") != - 1) {
+            int index = indexGetter.indexOf("7");
+            System.out.println("index: " + index);
+            indexGetter = indexGetter.substring(0, index) + indexGetter.substring(index +1);
+            System.out.println("after: " + indexGetter);
+            int temp = bid[i];
+            bid[i] = bid[index];
+            bid[index] = temp;
+            i++;
         }
 
         System.out.println(Arrays.toString(bid));
