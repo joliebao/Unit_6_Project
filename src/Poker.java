@@ -106,6 +106,7 @@ public class Poker {
             int index = indexGetter.indexOf("1");
             System.out.println("index: " + index);
             indexGetter = indexGetter.substring(0, index) + indexGetter.substring(index +1);
+            indexGetter = indexGetter.substring(0, index) + "0" + indexGetter.substring(index);
             System.out.println("after: " + indexGetter);
             int temp = bid[i];
             bid[i] = bid[index];
@@ -116,6 +117,7 @@ public class Poker {
             int index = indexGetter.indexOf("2");
             System.out.println("index: " + index);
             indexGetter = indexGetter.substring(0, index) + indexGetter.substring(index +1);
+            indexGetter = indexGetter.substring(0, index) + "0" + indexGetter.substring(index);
             System.out.println("after: " + indexGetter);
             int temp = bid[i];
             bid[i] = bid[index];
@@ -126,6 +128,7 @@ public class Poker {
             int index = indexGetter.indexOf("3");
             System.out.println("index: " + index);
             indexGetter = indexGetter.substring(0, index) + indexGetter.substring(index +1);
+            indexGetter = indexGetter.substring(0, index) + "0" + indexGetter.substring(index);
             System.out.println("after: " + indexGetter);
             int temp = bid[i];
             bid[i] = bid[index];
@@ -136,6 +139,7 @@ public class Poker {
             int index = indexGetter.indexOf("4");
             System.out.println("index: " + index);
             indexGetter = indexGetter.substring(0, index) + indexGetter.substring(index +1);
+            indexGetter = indexGetter.substring(0, index) + "0" + indexGetter.substring(index);
             System.out.println("after: " + indexGetter);
             int temp = bid[i];
             bid[i] = bid[index];
@@ -146,6 +150,7 @@ public class Poker {
             int index = indexGetter.indexOf("5");
             System.out.println("index: " + index);
             indexGetter = indexGetter.substring(0, index) + indexGetter.substring(index +1);
+            indexGetter = indexGetter.substring(0, index) + "0" + indexGetter.substring(index);
             System.out.println("after: " + indexGetter);
             int temp = bid[i];
             bid[i] = bid[index];
@@ -156,6 +161,7 @@ public class Poker {
             int index = indexGetter.indexOf("6");
             System.out.println("index: " + index);
             indexGetter = indexGetter.substring(0, index) + indexGetter.substring(index +1);
+            indexGetter = indexGetter.substring(0, index) + "0" + indexGetter.substring(index);
             System.out.println("after: " + indexGetter);
             int temp = bid[i];
             bid[i] = bid[index];
@@ -166,6 +172,7 @@ public class Poker {
             int index = indexGetter.indexOf("7");
             System.out.println("index: " + index);
             indexGetter = indexGetter.substring(0, index) + indexGetter.substring(index +1);
+            indexGetter = indexGetter.substring(0, index) + "0" + indexGetter.substring(index);
             System.out.println("after: " + indexGetter);
             int temp = bid[i];
             bid[i] = bid[index];
