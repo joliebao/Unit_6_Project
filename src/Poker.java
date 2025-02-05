@@ -94,12 +94,15 @@ public class Poker {
     // Part 2 ----------------------- - - -- - - - -
     // Sorting by deck title (ex. high card, one pair, two pair)
     public void sortByDeck() {
+        System.out.println(Arrays.toString(bid));
+        System.out.println(Arrays.toString(cards));
         // sorted into type of deck
         // indexGetterArray = original hand value; use it to compare the array values and change the bid+card values to match
         String indexGetter = "";
         for (int num : typeOfDeck){
             indexGetter += num;
         }
+        System.out.println(indexGetter);
         int i = 0;
         while (indexGetter.contains("1")) {
             int index = indexGetter.indexOf("1");
@@ -150,6 +153,7 @@ public class Poker {
             organizedBid[i] = bid[index];
             i++;
         }
+        System.out.println(Arrays.toString(organizedBid));
     }
 
     // sort by numbers (ex. 1, 2, 3)
@@ -164,7 +168,6 @@ public class Poker {
 
             cards[i+1] = cards[i+1].replace("[", "");
             cards[i+1] = cards[i+1].replace("]", "");;
-            System.out.println(Arrays.toString(cards));
 
             String[] handPrev = cards[i].split(",");
             String[] handCurr = cards[i+1].split(",");
@@ -212,14 +215,12 @@ public class Poker {
                 }
             }
         }
-        System.out.println(Arrays.toString(cards));
     }
 
-    public int totalBid(){
-        for (int i = 0; i < cards.length; i++){
-            total += bid[i] * i+1;
+    public void totalBid(){
+        for (int i = 0; i < organizedBid.length; i++){
+            total += organizedBid[i] * (i+1);
         }
-        return total;
     }
 
     public String toString(){

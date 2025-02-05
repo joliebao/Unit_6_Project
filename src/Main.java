@@ -9,6 +9,7 @@ public class Main {
         int[] bet = getBet("src/InputFile");
 
         Poker poker = new Poker(hand, bet);
+
         for (int i = 0; i < hand.length; i++) {
             poker.bubbleSort();
         }
