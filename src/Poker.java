@@ -218,8 +218,8 @@ public class Poker {
     }
 
     public void totalBid(){
-        for (int i = 0; i < organizedBid.length; i++){
-            total += organizedBid[i] * (i+1);
+        for (int i = 1; i < organizedBid.length + 1; i++){
+            total += organizedBid[i-1] * i;
         }
     }
 
