@@ -69,10 +69,10 @@ public class Poker {
                 typeOfDeck[iterationNum] = 7;
             } else if (triple == 1 && twice == 1){
                 fullHouse++;
-                typeOfDeck[iterationNum] = 6;
+                typeOfDeck[iterationNum] = 5;
             } else if (counter1 == 4 || counter2 == 4){
                 fourOfAKind++;
-                typeOfDeck[iterationNum] = 5;
+                typeOfDeck[iterationNum] = 6;
             } else if (triple == 1) {
                 threeOfAKind++;
                 typeOfDeck[iterationNum] = 4;
