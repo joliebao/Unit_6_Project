@@ -9,12 +9,9 @@ public class Main {
         int[] bet = getBet("src/InputFile");
 
         Poker poker = new Poker(hand, bet);
-
         poker.analyzeHand();
         poker.sortByDeck();
-        for (int i = 0; i < hand.length; i++) {
-            poker.bubbleSort();
-        }
+        poker.bubbleSort();
         poker.totalBid();
         System.out.println("____________");
         System.out.println(poker);

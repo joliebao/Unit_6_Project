@@ -4,9 +4,8 @@ import java.util.HashMap;
 public class Poker {
     private int[] bid;
     private String[] cards;
-    private int[] typeOfDeck;
-    private int iterationNum;
     private int[] organizedBid;
+    private String indexGetter = "";
 
     // sorts of deck hands
     private int fiveOfAKind = 0;
@@ -22,7 +21,6 @@ public class Poker {
     public Poker(String[] cards, int[] bid) {
         this.cards = cards;
         this.bid = bid;
-        typeOfDeck = new int[cards.length];
         organizedBid = new int[bid.length];
     }
 
@@ -66,43 +64,34 @@ public class Poker {
 
             if (counter1 == 5) {
                 fiveOfAKind++;
-                typeOfDeck[iterationNum] = 7;
+                indexGetter += 7;
             } else if (triple == 1 && twice == 1){
                 fullHouse++;
-                typeOfDeck[iterationNum] = 5;
+                indexGetter += 5;
             } else if (counter1 == 4 || counter2 == 4){
                 fourOfAKind++;
-                typeOfDeck[iterationNum] = 6;
+                indexGetter += 6;
             } else if (triple == 1) {
                 threeOfAKind++;
-                typeOfDeck[iterationNum] = 4;
+                indexGetter += 4;
             } else if (twice == 2) {
                 twoPair++;
-                typeOfDeck[iterationNum] = 3;
+                indexGetter += 3;
             } else if (twice == 1) {
                 onePair++;
-                typeOfDeck[iterationNum] = 2;
+                indexGetter += 2;
             } else {
                 highCard++;
-                typeOfDeck[iterationNum] = 1;
+                indexGetter += 1;
             }
-
-            iterationNum++;
         }
     }
 
     // Part 2 ----------------------- - - -- - - - -
     // Sorting by deck title (ex. high card, one pair, two pair)
     public void sortByDeck() {
-        System.out.println(Arrays.toString(bid));
-        System.out.println(Arrays.toString(cards));
         // sorted into type of deck
         // indexGetterArray = original hand value; use it to compare the array values and change the bid+card values to match
-        String indexGetter = "";
-        for (int num : typeOfDeck){
-            indexGetter += num;
-        }
-        System.out.println(indexGetter);
         int i = 0;
         while (indexGetter.contains("1")) {
             int index = indexGetter.indexOf("1");
@@ -160,6 +149,32 @@ public class Poker {
     // Note: CALL THIS FIRST!
     public void bubbleSort(){
         for (int i = 0; i < cards.length - 1; i++){
+//            int sum = 0;
+//            sum += highCard;
+//            if (sum == i){
+//                i++;
+//                sum += onePair;
+//            }
+//            if (sum == i){
+//                i++;
+//                sum += twoPair;
+//            }
+//            if (sum == i){
+//                i++;
+//                sum += threeOfAKind;
+//            }
+//            if (sum == i){
+//                i++;
+//                sum += fullHouse;
+//            }
+//            if (sum == i){
+//                i++;
+//                sum += fourOfAKind;
+//            }
+//            if (sum == i){
+//                i++;
+//            }
+
             int conversion1 = 0;
             int conversion2 = 0;
 
@@ -204,10 +219,12 @@ public class Poker {
                     cards[i] = cards[i+1];
                     cards[i+1] = temp;
 
-                    int placeholder = bid[i];
-                    bid[i] = bid[i+1];
-                    bid[i+1] = placeholder;
+                    int placeholder = organizedBid[i];
+                    organizedBid[i] = organizedBid[i+1];
+                    organizedBid[i+1] = placeholder;
                     swapped = true;
+
+//                    bid[bid.length-1] =
                 } else if (conversion1 == conversion2) {
                     counter ++;
                 } else {
@@ -215,6 +232,7 @@ public class Poker {
                 }
             }
         }
+        System.out.println(Arrays.toString(organizedBid));
     }
 
     public void totalBid(){
