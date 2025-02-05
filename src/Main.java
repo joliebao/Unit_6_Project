@@ -12,6 +12,7 @@ public class Main {
         poker.bubbleSort();
         poker.analyzeHand();
         poker.sortByDeck();
+        poker.totalBid();
         System.out.println("____________");
         System.out.println(poker);
     }

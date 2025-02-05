@@ -166,32 +166,47 @@ public class Poker {
             cards[i] = cards[i].replace("[", "");
             cards[i] = cards[i].replace("]", "");;
 
+            cards[i+1] = cards[i+1].replace("[", "");
+            cards[i+1] = cards[i+1].replace("]", "");;
+            System.out.println(Arrays.toString(cards));
+
             String[] handPrev = cards[i].split(",");
             String[] handCurr = cards[i+1].split(",");
 
-            for (int i2 = 0; i2 < handPrev.length; i2++){
-                if (handPrev[i].equals("King")){
+            int counter = 0;
+            boolean swapped = false;
+            while ((counter < handPrev.length) && !swapped){
+                if (handPrev[counter].equals("King")){
                     conversion1 = 13;
-                } else if (handPrev[i].equals("Queen")){
+                } else if (handPrev[counter].equals("Queen")){
                     conversion1 = 12;
-                } else if (handPrev[i].equals("Jack")){
+                } else if (handPrev[counter].equals("Jack")){
                     conversion1 = 11;
-                } else if (handPrev[i].equals("Ace")){
+                } else if (handPrev[counter].equals("Ace")){
                     conversion1 = 1;
                 } else {
-                    conversion1 = Integer.parseInt(handPrev[i]);
+                    conversion1 = Integer.parseInt(handPrev[counter]);
                 }
 
-                if (handCurr[i].equals("King")){
+                if (handCurr[counter].equals("King")){
                     conversion2 = 13;
-                } else if (handCurr.equals("Queen")){
+                } else if (handCurr[counter].equals("Queen")){
                     conversion2 = 12;
-                } else if (handCurr.equals("Jack")){
+                } else if (handCurr[counter].equals("Jack")){
                     conversion2 = 11;
-                } else if (handCurr.equals("Ace")){
+                } else if (handCurr[counter].equals("Ace")){
                     conversion2 = 1;
                 } else {
-                    conversion2 = Integer.parseInt(handCurr[i]);
+                    conversion2 = Integer.parseInt(handCurr[counter]);
+                }
+
+                if (conversion1 > conversion2){
+                    String temp = cards[i];
+                    cards[i] = cards[i+1];
+                    cards[i+1] = temp;
+                    swapped = true;
+                } else {
+                    counter ++;
                 }
             }
         }
