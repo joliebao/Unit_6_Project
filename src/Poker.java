@@ -200,6 +200,10 @@ public class Poker {
                     String temp = cards[i];
                     cards[i] = cards[i+1];
                     cards[i+1] = temp;
+
+                    int placeholder = bid[i];
+                    bid[i] = bid[i+1];
+                    bid[i+1] = placeholder;
                     swapped = true;
                 } else if (conversion1 == conversion2) {
                     counter ++;
