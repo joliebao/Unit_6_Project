@@ -100,8 +100,6 @@ public class Poker {
         for (int num : typeOfDeck){
             indexGetter += num;
         }
-
-        System.out.println(indexGetter);
         int i = 0;
         while (indexGetter.contains("1")) {
             int index = indexGetter.indexOf("1");
@@ -152,8 +150,6 @@ public class Poker {
             organizedBid[i] = bid[index];
             i++;
         }
-
-        System.out.println(Arrays.toString(organizedBid));
     }
 
     // sort by numbers (ex. 1, 2, 3)
@@ -205,8 +201,10 @@ public class Poker {
                     cards[i] = cards[i+1];
                     cards[i+1] = temp;
                     swapped = true;
-                } else {
+                } else if (conversion1 == conversion2) {
                     counter ++;
+                } else {
+                    swapped = true; // ending the loop
                 }
             }
         }
