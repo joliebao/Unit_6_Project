@@ -157,60 +157,41 @@ public class Poker {
     }
 
     // sort by numbers (ex. 1, 2, 3)
-    // Note: need to consider the deck rankings, maybe deck ranking would occur second when the methods are called?
+    // Note: CALL THIS FIRST!
     public void bubbleSort(){
-        for (int i = 0; i < cards.length; i++){
-            int counter = 0;
-            String deck1 = cards[i];
-            String deck2 = cards[i+1];
-            String card1 = "";
-            String card2 = "";
+        for (int i = 0; i < cards.length - 1; i++){
+            int conversion1 = 0;
+            int conversion2 = 0;
 
-            while (counter < 5){
-                if (counter == 1){
-                    deck1 = deck1.substring(deck1.indexOf(" "));
-                    deck2 = deck2.substring(deck2.indexOf(" "));
-                }
-                if (counter == 4) {
-                    card1 = deck1;
-                    card2 = deck2;
-                } else {
-                    card1 = deck1.substring(0, deck1.indexOf(" "));
-                    card2 = deck2.substring(0, deck2.indexOf(" "));
-                }
-                int conversion1 = 0;
-                int conversion2 = 0;
+            cards[i] = cards[i].replace("[", "");
+            cards[i] = cards[i].replace("]", "");;
 
-                if (card1.equals("King")){
+            String[] handPrev = cards[i].split(",");
+            String[] handCurr = cards[i+1].split(",");
+
+            for (int i2 = 0; i2 < handPrev.length; i2++){
+                if (handPrev[i].equals("King")){
                     conversion1 = 13;
-                } else if (card1.equals("Queen")){
+                } else if (handPrev[i].equals("Queen")){
                     conversion1 = 12;
-                } else if (card1.equals("Jack")){
+                } else if (handPrev[i].equals("Jack")){
                     conversion1 = 11;
-                } else if (card1.equals("Ace")){
+                } else if (handPrev[i].equals("Ace")){
                     conversion1 = 1;
                 } else {
-                    conversion1 = Integer.parseInt(card1);
+                    conversion1 = Integer.parseInt(handPrev[i]);
                 }
 
-                if (card2.equals("King")){
+                if (handCurr[i].equals("King")){
                     conversion2 = 13;
-                } else if (card2.equals("Queen")){
+                } else if (handCurr.equals("Queen")){
                     conversion2 = 12;
-                } else if (card2.equals("Jack")){
+                } else if (handCurr.equals("Jack")){
                     conversion2 = 11;
-                } else if (card2.equals("Ace")){
+                } else if (handCurr.equals("Ace")){
                     conversion2 = 1;
                 } else {
-                    conversion2 = Integer.parseInt(card2);
-                }
-
-                if (conversion1 > conversion2){
-                    cards[i] = deck2;
-                    cards[i+1] = deck1;
-                }
-                else if (conversion1 == conversion2){
-                    counter++;
+                    conversion2 = Integer.parseInt(handCurr[i]);
                 }
             }
         }

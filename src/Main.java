@@ -9,6 +9,7 @@ public class Main {
         int[] bet = getBet("src/InputFile");
 
         Poker poker = new Poker(hand, bet);
+        poker.bubbleSort();
         poker.analyzeHand();
         poker.sortByDeck();
         System.out.println("____________");
