@@ -10,8 +10,9 @@ public class Main {
 
         Poker poker = new Poker(hand, bet);
         poker.analyzeHand();
-        poker.sortByDeck();
         poker.bubbleSort();
+        poker.sortByDeck();
+//        poker.bubbleSort();
         poker.totalBid();
         System.out.println("____________");
         System.out.println(poker);

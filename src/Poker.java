@@ -149,57 +149,38 @@ public class Poker {
     // Note: CALL THIS FIRST!
     public void bubbleSort(){
         for (int i = 0; i < cards.length - 1; i++){
-//            int sum = 0;
-//            sum += highCard;
-//            if (sum == i){
-//                i++;
-//                sum += onePair;
-//            }
-//            if (sum == i){
-//                i++;
-//                sum += twoPair;
-//            }
-//            if (sum == i){
-//                i++;
-//                sum += threeOfAKind;
-//            }
-//            if (sum == i){
-//                i++;
-//                sum += fullHouse;
-//            }
-//            if (sum == i){
-//                i++;
-//                sum += fourOfAKind;
-//            }
-//            if (sum == i){
-//                i++;
-//            }
-
             int conversion1 = 0;
             int conversion2 = 0;
+            int conversion3 = 0;
 
             cards[i] = cards[i].replace("[", "");
-            cards[i] = cards[i].replace("]", "");;
+            cards[i] = cards[i].replace("]", "");
 
             cards[i+1] = cards[i+1].replace("[", "");
-            cards[i+1] = cards[i+1].replace("]", "");;
+            cards[i+1] = cards[i+1].replace("]", "");
 
-            String[] handPrev = cards[i].split(",");
-            String[] handCurr = cards[i+1].split(",");
+            String[] handPrev = new String[5];
+            if (i > 0) {
+                handPrev = cards[i-1].split(",");
+            }
+            String[] handCurr = cards[i].split(",");
+            String[] handFutr = cards[i+1].split(",");
 
             int counter = 0;
             boolean swapped = false;
-            while ((counter < handPrev.length) && !swapped){
-                if (handPrev[counter].equals("King")){
-                    conversion1 = 13;
-                } else if (handPrev[counter].equals("Queen")){
-                    conversion1 = 12;
-                } else if (handPrev[counter].equals("Jack")){
-                    conversion1 = 11;
-                } else if (handPrev[counter].equals("Ace")){
-                    conversion1 = 1;
-                } else {
-                    conversion1 = Integer.parseInt(handPrev[counter]);
+            while ((counter < handCurr.length) && !swapped){
+                if (i > 0) {
+                    if (handPrev[counter].equals("King")) {
+                        conversion1 = 13;
+                    } else if (handPrev[counter].equals("Queen")) {
+                        conversion1 = 12;
+                    } else if (handPrev[counter].equals("Jack")) {
+                        conversion1 = 11;
+                    } else if (handPrev[counter].equals("Ace")) {
+                        conversion1 = 1;
+                    } else {
+                        conversion1 = Integer.parseInt(handPrev[counter]);
+                    }
                 }
 
                 if (handCurr[counter].equals("King")){
@@ -214,25 +195,45 @@ public class Poker {
                     conversion2 = Integer.parseInt(handCurr[counter]);
                 }
 
-                if (conversion1 > conversion2){
-                    String temp = cards[i];
-                    cards[i] = cards[i+1];
-                    cards[i+1] = temp;
-
-                    int placeholder = organizedBid[i];
-                    organizedBid[i] = organizedBid[i+1];
-                    organizedBid[i+1] = placeholder;
-                    swapped = true;
-
-//                    bid[bid.length-1] =
-                } else if (conversion1 == conversion2) {
-                    counter ++;
+                if (handFutr[counter].equals("King")){
+                    conversion3 = 13;
+                } else if (handFutr[counter].equals("Queen")){
+                    conversion3 = 12;
+                } else if (handFutr[counter].equals("Jack")){
+                    conversion3 = 11;
+                } else if (handFutr[counter].equals("Ace")){
+                    conversion3 = 1;
                 } else {
-                    swapped = true; // ending the loop
+                    conversion3 = Integer.parseInt(handFutr[counter]);
+                }
+
+                if (conversion2 > conversion3) {
+                    String temp = cards[i];
+                    cards[i] = cards[i + 1];
+                    cards[i + 1] = temp;
+
+                    int placeholder = bid[i];
+                    bid[i] = bid[i + 1];
+                    bid[i + 1] = placeholder;
+
+                    if (conversion1 > conversion2){
+                        String temp2 = cards[i-1];
+                        cards[i-1] = cards[i];
+                        cards[i] = temp2;
+
+                        int placeholder2 = bid[i-1];
+                        bid[i-1] = bid[i];
+                        bid[i] = placeholder2;
+                    }
+                    swapped = true;
+                } else if (conversion2 == conversion3) {
+                    counter++;
+                } else {
+                    swapped = true;
                 }
             }
         }
-        System.out.println(Arrays.toString(organizedBid));
+        System.out.println(Arrays.toString(bid));
     }
 
     public void totalBid(){
