@@ -1,10 +1,11 @@
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.ArrayList;
 
 public class Poker {
     private int[] bid;
     private String[] cards;
     private int[] organizedBid;
+    private ArrayList<String> organizedCards;
     private String indexGetter = "";
 
     // sorts of deck hands
@@ -22,14 +23,25 @@ public class Poker {
         this.cards = cards;
         this.bid = bid;
         organizedBid = new int[bid.length];
+        organizedCards = new ArrayList<String>();
     }
 
-    public void analyzeHand() {  // part 1
-        // putting each element in the line into a specific card number
-        for (String pile : cards) {
-            pile = pile.replace("[", "");
-            pile = pile.replace("]", "");;
+    private void bracketRemoval(){
+        for (int i = 0; i < cards.length; i++) {
+            cards[i] = cards[i].replace("[", "");
+            cards[i] = cards[i].replace("]", "");
+        }
+    }
 
+    // Part 1 - - ---- -- - --- - - - -- -
+    public void analyzeHand() {
+        // putting each element in the line into a specific card number
+
+        // for some reason index 0 starts with brackets...??
+        cards[0] = cards[0].replace("[", "");
+        cards[0] = cards[0].replace("]", "");
+        for (String pile : cards) {
+            bracketRemoval();
             String[] hand = pile.split(",");
 
             int counter1 = 0;
@@ -53,7 +65,6 @@ public class Poker {
             int twice = 0;
 
             int[] counters = {counter1, counter2, counter3, counter4};
-
             for (int counter : counters){
                 if (counter == 3) {
                     triple++;
@@ -88,10 +99,9 @@ public class Poker {
     }
 
     // Part 2 ----------------------- - - -- - - - -
-    // Sorting by deck title (ex. high card, one pair, two pair)
+    // Sorting by deck title (ex. high card, one pair, two pair), completed second
+    // Used with bubbleSort();
     public void sortByDeck() {
-        // sorted into type of deck
-        // indexGetterArray = original hand value; use it to compare the array values and change the bid+card values to match
         int i = 0;
         while (indexGetter.contains("1")) {
             int index = indexGetter.indexOf("1");
@@ -142,98 +152,54 @@ public class Poker {
             organizedBid[i] = bid[index];
             i++;
         }
-        System.out.println(Arrays.toString(organizedBid));
+//        System.out.println(Arrays.toString(organizedBid));
+    }
+
+    private int[] toIntegerArray(String pile){
+        int conversion;
+        String arr[] = pile.split(",");
+        int[] convertedArr = new int[5];
+        for (int i = 0; i < 5; i++) {
+            if (arr[i].equals("King")) {
+                conversion = 13;
+            } else if (arr[i].equals("Queen")) {
+                conversion = 12;
+            } else if (arr[i].equals("Jack")) {
+                conversion = 11;
+            } else if (arr[i].equals("Ace")) {
+                conversion = 1;
+            } else {
+                conversion = Integer.parseInt(arr[i]);
+            }
+            convertedArr[i] = conversion;
+        }
+        return convertedArr;
     }
 
     // sort by numbers (ex. 1, 2, 3)
-    // Note: CALL THIS FIRST!
+    // Note: CALL THIS FIRST!, completed first in part 2
     public void bubbleSort(){
-        for (int i = 0; i < cards.length - 1; i++){
-            int conversion1 = 0;
-            int conversion2 = 0;
-            int conversion3 = 0;
-
-            cards[i] = cards[i].replace("[", "");
-            cards[i] = cards[i].replace("]", "");
-
-            cards[i+1] = cards[i+1].replace("[", "");
-            cards[i+1] = cards[i+1].replace("]", "");
-
-            String[] handPrev = new String[5];
-            if (i > 0) {
-                handPrev = cards[i-1].split(",");
-            }
-            String[] handCurr = cards[i].split(",");
-            String[] handFutr = cards[i+1].split(",");
+        for (int i = 0; i < cards.length-1; i++){
+            bracketRemoval();
+            int[] curr = toIntegerArray(cards[i]);
+            int[] next = toIntegerArray(cards[i+1]);
+            // test
+            System.out.println(Arrays.toString(curr));
+            System.out.println(Arrays.toString(next));
 
             int counter = 0;
             boolean swapped = false;
-            while ((counter < handCurr.length) && !swapped){
-                if (i > 0) {
-                    if (handPrev[counter].equals("King")) {
-                        conversion1 = 13;
-                    } else if (handPrev[counter].equals("Queen")) {
-                        conversion1 = 12;
-                    } else if (handPrev[counter].equals("Jack")) {
-                        conversion1 = 11;
-                    } else if (handPrev[counter].equals("Ace")) {
-                        conversion1 = 1;
-                    } else {
-                        conversion1 = Integer.parseInt(handPrev[counter]);
-                    }
-                }
-
-                if (handCurr[counter].equals("King")){
-                    conversion2 = 13;
-                } else if (handCurr[counter].equals("Queen")){
-                    conversion2 = 12;
-                } else if (handCurr[counter].equals("Jack")){
-                    conversion2 = 11;
-                } else if (handCurr[counter].equals("Ace")){
-                    conversion2 = 1;
-                } else {
-                    conversion2 = Integer.parseInt(handCurr[counter]);
-                }
-
-                if (handFutr[counter].equals("King")){
-                    conversion3 = 13;
-                } else if (handFutr[counter].equals("Queen")){
-                    conversion3 = 12;
-                } else if (handFutr[counter].equals("Jack")){
-                    conversion3 = 11;
-                } else if (handFutr[counter].equals("Ace")){
-                    conversion3 = 1;
-                } else {
-                    conversion3 = Integer.parseInt(handFutr[counter]);
-                }
-
-                if (conversion2 > conversion3) {
-                    String temp = cards[i];
-                    cards[i] = cards[i + 1];
-                    cards[i + 1] = temp;
-
-                    int placeholder = bid[i];
-                    bid[i] = bid[i + 1];
-                    bid[i + 1] = placeholder;
-
-                    if (conversion1 > conversion2){
-                        String temp2 = cards[i-1];
-                        cards[i-1] = cards[i];
-                        cards[i] = temp2;
-
-                        int placeholder2 = bid[i-1];
-                        bid[i-1] = bid[i];
-                        bid[i] = placeholder2;
-                    }
+            while (counter < 5 && !swapped){
+                if (curr[counter] > next[counter]){
+                    // do something
                     swapped = true;
-                } else if (conversion2 == conversion3) {
-                    counter++;
-                } else {
+                } else if (curr[counter] < next[counter]) {
+                    swapped = true;
+                } else {    // if equal
                     swapped = true;
                 }
             }
         }
-        System.out.println(Arrays.toString(bid));
     }
 
     public void totalBid(){
