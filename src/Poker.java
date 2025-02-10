@@ -178,16 +178,21 @@ public class Poker {
     // sort by numbers (ex. 1, 2, 3)
     // Note: CALL THIS FIRST!, completed first in part 2
     public void bubbleSort(){
-        for (int i = cards.length; i < cards.length - 1; i--){
+
+        for (int i = cards.length - 1; i > 0; i--){
             bracketRemoval();
             int[] curr = toIntegerArray(cards[i]);
             int[] prev = toIntegerArray(cards[i-1]);
 
             for (int j = 0; j < 5; j++){
                 if (curr[j] < prev[j]){
+                    String temp = cards[i-1];
                     cards[i-1] = cards[i];
+                    cards[i] = temp;
                 }
             }
+
+            System.out.println(Arrays.toString(cards));
 
             //idea : add all lines into the deck, and start from the back, if the thing is smaller switch the two
 
@@ -212,7 +217,6 @@ public class Poker {
 //                    counter++;
 //                }
 //            }
-            System.out.println(organizedCards);
         }
     }
 
