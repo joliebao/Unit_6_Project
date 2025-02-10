@@ -179,26 +179,22 @@ public class Poker {
     // Note: CALL THIS FIRST!, completed first in part 2
     public void bubbleSort(){
 
-        for (int i = cards.length - 1; i > 0; i--){
+        for (int i = 0; i > cards.length - 1; i++){
             bracketRemoval();
             int counter = i;
             while (counter > 0) {
                 int[] curr = toIntegerArray(cards[counter]);
                 int[] prev = toIntegerArray(cards[counter-1]);
 
-                int j = 0;
-                while (j < 5) {
+                for (int j = 0; j < 5; j++) {
                     if (curr[j] < prev[j]) {
-                        String temp = cards[counter - 1];
-                        cards[counter - 1] = cards[counter];
-                        cards[counter] = temp;
+                        String temp = cards[i - 1];
+                        cards[i - 1] = cards[i];
+                        cards[i] = temp;
 
-                        int temp1 = bid[counter-1];
-                        bid[counter-1] = bid[counter];
-                        bid[counter] = temp1;
-                        j = 5;
-                    } else if (curr[j] == prev[j]){
-                        j++;
+                        int temp1 = bid[i-1];
+                        bid[i - 1] = bid[i];
+                        bid[i] = temp1;
                     }
                 }
                 counter --;
