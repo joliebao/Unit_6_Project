@@ -181,42 +181,30 @@ public class Poker {
 
         for (int i = cards.length - 1; i > 0; i--){
             bracketRemoval();
-            int[] curr = toIntegerArray(cards[i]);
-            int[] prev = toIntegerArray(cards[i-1]);
+            int counter = i;
+            while (counter > 0) {
+                int[] curr = toIntegerArray(cards[counter]);
+                int[] prev = toIntegerArray(cards[counter-1]);
 
-            for (int j = 0; j < 5; j++){
-                if (curr[j] < prev[j]){
-                    String temp = cards[i-1];
-                    cards[i-1] = cards[i];
-                    cards[i] = temp;
+                int j = 0;
+                while (j < 5) {
+                    if (curr[j] < prev[j]) {
+                        String temp = cards[counter - 1];
+                        cards[counter - 1] = cards[counter];
+                        cards[counter] = temp;
+
+                        int temp1 = bid[counter-1];
+                        bid[counter-1] = bid[counter];
+                        bid[counter] = temp1;
+                        j = 5;
+                    } else if (curr[j] == prev[j]){
+                        j++;
+                    }
                 }
+                counter --;
             }
 
             System.out.println(Arrays.toString(cards));
-
-            //idea : add all lines into the deck, and start from the back, if the thing is smaller switch the two
-
-
-//            int counter = 0;
-//            boolean swapped = false;
-//
-//            if (organizedCards.size() == 0) {
-//                organizedCards.add(cards[i]);
-//            }
-//            while (counter < 5 && !swapped){ // if the elements from the index before has a value greater than the elements from the index after;
-//                if (curr[counter] > next[counter]){
-//                    organizedCards.add(cards[i + 1]);   // the organized card list will put the future card before the past card
-//                    organizedCards.add(cards[i]);
-//                    swapped = true;
-//                } else if (curr[counter] < next[counter]) {
-//                    organizedCards.add(cards[i]);   // the organized card list will put the past card before the future card
-//                    organizedCards.add(cards[i + 1]);
-//                    // do something
-//                    swapped = true;
-//                } else {    // if equal
-//                    counter++;
-//                }
-//            }
         }
     }
 
