@@ -152,7 +152,6 @@ public class Poker {
             organizedBid[i] = bid[index];
             i++;
         }
-//        System.out.println(Arrays.toString(organizedBid));
     }
 
     private int[] toIntegerArray(String pile){
@@ -179,26 +178,65 @@ public class Poker {
     // sort by numbers (ex. 1, 2, 3)
     // Note: CALL THIS FIRST!, completed first in part 2
     public void bubbleSort(){
-        for (int i = 0; i < cards.length-1; i++){
+        for (int i = 0; i < cards.length-1; i += 2){
             bracketRemoval();
             int[] curr = toIntegerArray(cards[i]);
             int[] next = toIntegerArray(cards[i+1]);
-            // test
-            System.out.println(Arrays.toString(curr));
-            System.out.println(Arrays.toString(next));
+
+//            while (organizedCards.size() != 0) {
+//                // sorted list is empty, just put item there
+//                if (organizedCards.size() == 0) {
+//                    organizedCards.add(cards[i]);
+//                }
+//                else {
+//                    int deck1Num = 0;
+//                    int deck2Num = 0;
+//                    for (int j = 0; j < 5; j++){
+//                        deck1Num = toIntegerArray(organizedCards[i]);
+//                        deck2Num = toIntegerArray(organizedCards[0]);
+//
+//                    // if item should be the first number in the list
+//                    if (toIntegerArray(cards[i]) < toIntegerArray(organizedCards.get(0))) {
+//                        organizedCards.add(0, item);
+//                    }
+//                    // if item should be the last number in the list
+//                    else if (item > organizedCards.get(organizedCards.size()-1)) {
+//                        organizedCards.add(item);
+//                    }
+//                    // item is somewhere in between
+//                    else {
+//                        for (int i = 0; i < organizedCards.size()-1; i++) {
+//                            int current = organizedCards.get(i);
+//                            int next = organizedCards.get(i+1);
+//                            if (item > current && item < next) {
+//                                organizedCards.add(i+1, item);
+//                                break;
+//                            }
+//                        }
+//                    }
+//                }
 
             int counter = 0;
             boolean swapped = false;
-            while (counter < 5 && !swapped){
+
+            if (organizedCards.size() == 0) {
+                organizedCards.add(cards[i]);
+            }
+            while (counter < 5 && !swapped){ // if the elements from the index before has a value greater than the elements from the index after;
                 if (curr[counter] > next[counter]){
-                    // do something
+                    organizedCards.add(cards[i + 1]);   // the organized card list will put the future card before the past card
+                    organizedCards.add(cards[i]);
                     swapped = true;
                 } else if (curr[counter] < next[counter]) {
+                    organizedCards.add(cards[i]);   // the organized card list will put the past card before the future card
+                    organizedCards.add(cards[i + 1]);
+                    // do something
                     swapped = true;
                 } else {    // if equal
-                    swapped = true;
+                    counter++;
                 }
             }
+            System.out.println(organizedCards);
         }
     }
 
